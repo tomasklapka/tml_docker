@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-ENV TAU_COMMIT e48bcd1
+ENV TAU_COMMIT 50c2883
 
 RUN addgroup -S tau \
     && adduser -S tau -G tau --home /tmp/tau \
@@ -9,7 +9,7 @@ RUN addgroup -S tau \
     && git clone "https://github.com/IDNI/tau" /home/tau/build \
     && cd /home/tau/build \
     && git reset --hard $TAU_COMMIT \
-    && g++ -std=c++1y tml.cpp -W -Wall -Wpedantic -o/bin/tml -O3 -flto \
+    && g++ -std=c++1y tml.cpp driver.cpp bdd.cpp -W -Wall -Wpedantic -o/bin/tml -O3 -flto \
     && apk del .build-deps \
     && rm -rf /home/tau/build
 
